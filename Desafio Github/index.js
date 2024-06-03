@@ -1,25 +1,36 @@
-const heroName = prompt("Informe o nome do herói:");
-const heroXP = parseInt(prompt("Informe a quantidade de XP do herói:"));
-let heroLevel;
+function calcularNivel(vitorias, derrotas) {
+    // Calcula o saldo de vitórias
+    const saldoVitorias = vitorias - derrotas;
+    let nivel;
 
-if (heroXP < 1000) {
-    heroLevel = "Ferro";
-} else if (heroXP >= 1001 && heroXP <= 2000) {
-    heroLevel = "Bronze";
-} else if (heroXP >= 2001 && heroXP <= 5000) {
-    heroLevel = "Prata";
-} else if (heroXP >= 6001 && heroXP <= 7000) {
-    heroLevel = "Ouro";
-} else if (heroXP >= 7001 && heroXP <= 8000) {
-    heroLevel = "Platina";
-} else if (heroXP >= 8001 && heroXP <= 9000) {
-    heroLevel = "Ascendente";
-} else if (heroXP >= 9001 && heroXP <= 10000) {
-    heroLevel = "Imortal";
-} else if (heroXP >= 10001) {
-    heroLevel = "Radiante";
-} else {
-    heroLevel = "Valor desconhecido"; 
+    // Determina o nível do jogador com base nas vitórias
+    if (vitorias < 10) {
+        nivel = "Ferro";
+    } else if (vitorias >= 11 && vitorias <= 20) {
+        nivel = "Bronze";
+    } else if (vitorias >= 21 && vitorias <= 50) {
+        nivel = "Prata";
+    } else if (vitorias >= 51 && vitorias <= 80) {
+        nivel = "Ouro";
+    } else if (vitorias >= 81 && vitorias <= 90) {
+        nivel = "Diamante";
+    } else if (vitorias >= 91 && vitorias <= 100) {
+        nivel = "Lendário";
+    } else if (vitorias >= 101) {
+        nivel = "Imortal";
+    }
+
+    return { saldoVitorias, nivel };
 }
 
-console.log("O herói de nome " + heroName + " está no nível " + heroLevel + ".");
+// Função para exibir o resultado
+function exibirResultado(vitorias, derrotas) {
+    const resultado = calcularNivel(vitorias, derrotas);
+    console.log(`O Herói tem um saldo de ${resultado.saldoVitorias} está no nível ${resultado.nivel}`);
+}
+
+// Exemplo de uso da função
+const vitorias = parseInt(prompt("Digite o número de vitórias:"));
+const derrotas = parseInt(prompt("Digite o número de derrotas:"));
+
+exibirResultado(vitorias, derrotas);
